@@ -1,0 +1,17 @@
+.calcButton {
+    font-family: 'Nunito', sans-serif;
+    width: 33.33%;
+    height: 10vh;
+    vertical-align: middle;
+    font-size: 1.5em;
+    background: rgba(225,98,88,1);
+    padding: 0;
+    margin: 0;
+    border: none;
+    color: white;
+}
+
+.calcButton:hover {
+    background: rgba(225,98,88,0.95);
+}
+
