@@ -11,18 +11,40 @@ export const CalcBase = ThemeableMixin(WidgetBase);
 export default class Calc extends CalcBase {
 
 	private calc: Calculator;
+	private inputVal: number;
 
 	constructor() {
 		super();
 		this.calc = new Calculator();
+		this.inputVal = 0;
 	}
 
-	private createButton(operation: any, icon: string) {
+	private handleChange(event: any) {
+		this.updateTotal(event.target.value);
+	}
+
+	private setInputVal(val: number) {
+		this.inputVal = val;
+	}
+
+	private updateTotal(newTotal: any) {
+		if (!isNaN(parseFloat(newTotal))) {
+			this.inputVal = parseFloat(newTotal);
+		}
+		this.invalidate();
+
+	}
+
+	private createButton(operation: string, icon: string) {
+
 		return w(Button, {
 			operation: operation,
 			calc: this.calc,
-			icon: icon
+			icon: icon,
+			inputVal: this.inputVal,
+			setInputVal: this.setInputVal
 		});
+
 	}
 
 	private createButtons() {
@@ -35,12 +57,12 @@ export default class Calc extends CalcBase {
 		// Row 2
 		const divide = this.createButton('divide', '/');
 		const multiply = this.createButton('multiply', '*');
-		const sqrt = this.createButton(' √', 'root');
+		const sqrt = this.createButton('root', '√');
 
 		// Row 3
-		const pow = this.createButton('^', 'pow');
+		const pow = this.createButton('power', '^');
 		const modulo = this.createButton('modulo', '%');
-		const dojo = this.createButton('dojo', '🐉');
+		const dojo = this.createButton('equals', '=');
 
 		return [
 			add, minus, clear,
@@ -52,8 +74,10 @@ export default class Calc extends CalcBase {
 
 	protected render() {
 
-		console.log(this.calc.total);
 		const buttons = this.createButtons();
+		const title = 'Dojo Calculator';
+		const bottomText = "Made with ☕️ by James Milner";
+
 
 		return [
 			v('div', {
@@ -61,17 +85,21 @@ export default class Calc extends CalcBase {
 			},[
 				v('h1', {
 					classes: this.classes(css.calcTitle)
-				}, ['Dojo Calculator']),
+				}, [title]),
 				v('div', {
 					classes: this.classes(css.calc)
 				},[
 					v('input', {
 						autofocus: true,
 						classes: this.classes(css.calcInput),
-						value : '' + this.calc.total
+						onkeyup: this.handleChange,
+						value : '' + this.inputVal
 					}),
 					v('div', buttons)
-				])
+				]),
+				v('span', {
+					classes: this.classes(css.calcBottomText)
+				}, [bottomText])
 			])
 		]
 	}

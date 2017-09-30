@@ -1,5 +1,5 @@
 {
-  "name": "biz-e-corp",
+  "name": "Dojo Calculator",
   "version": "1.0.0",
   "dependencies": {
     "@dojo/cli-build-webpack": "^2.0.0-beta2.6",

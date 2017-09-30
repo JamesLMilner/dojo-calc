@@ -10,7 +10,7 @@
 
 .calcTitle {
     text-align: center;
-    font-size: 3em;
+    font-size: 4em;
     margin: 0px;
     padding-top: 5vh;
     padding-bottom: 5vh;
@@ -18,12 +18,24 @@
     font-weight: lighter;
 }
 
+.calcBottomText {
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    font-size: 1.5em;
+    width: 100%;
+    padding-bottom: 1.5em;
+}
+
 .calc {
-    background-color: white;
+    background-color: #e16258;
+    border: none;
     width: 50vw;
     height: 50vh;
+    max-width: 600px;
     margin: 0 auto;
     padding: 0;
+    outline: none;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
@@ -32,7 +44,7 @@
     border: none;
     text-align: center;
     height: 20vh;
-    font-size: 2em;
+    font-size: 2.5em;
     margin: 0;
     padding: 0;
 }

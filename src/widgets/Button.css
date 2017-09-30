@@ -9,9 +9,20 @@
     margin: 0;
     border: none;
     color: white;
+    outline: none;
 }
 
 .calcButton:hover {
-    background: rgba(225,98,88,0.95);
+    background: #E26E65;
+    outline: none;
 }
 
+.calcButton:focus {
+    outline: none;
+    border: 0;
+}
+
+.calcButtonSelected {
+    background: #DB7C75;
+    outline: none;
+}

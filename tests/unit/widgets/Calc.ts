@@ -16,6 +16,8 @@
 // 	},
 
 // 	render() {
-// 		calcHarness.expectRender(v('h1', { title: 'I am a title!' }, [ 'Biz-E-Bodies' ]));
+// 		calcHarness.expectRender(
+//             v('h1', { title: 'I am a title!' }, [ 'Biz-E-Bodies' ]
+//         ));
 // 	}
 // });

@@ -1,71 +1,48 @@
-interface DiadicOperation {
+interface Operation {
 	(x: number, y: number): number;
 };
 
-interface MonadicOperation {
-	(x: number): number;
-};
-
-interface DiadicOperations {
-	[key: string]: DiadicOperation;
-}
-
-interface MonadicOperations {
-	[key: string]: MonadicOperation;
+interface Operations {
+	[key: string]: Operation;
 }
 
 export default class Calculator {
 
-	private _total: number;
-	private _operationValue: number;
+	public total: number;
 	public currentOperation: string;
-	private _diadicOperations: DiadicOperations;
-	private _monadicOperations: MonadicOperations;
+	private _operations: Operations;
 
 	constructor() {
 		this.currentOperation = 'none';
-		this._total = 0;
-		this._operationValue = 1;
+		this.total = 0;
 
-		this._diadicOperations = {
+		this._operations = {
 			'add' : this.add,
 			'minus' : this.minus,
 			'multiply' : this.multiply,
 			'divide' : this.divide,
-			'power' : this.power
-		};
-		this._monadicOperations = {
-			'clear' : this.clear
+			'power' : this.power,
+			'root' : this.root
 		};
 	}
 
-	get total() {
-		return this._total;
+	public reset(): void  {
+		this.total = 0;
+		this.setCurrentOperation('none');
 	}
 
-	get operationValue() {
-		return this._operationValue;
+	public setCurrentOperation(name: string): void {
+		this.currentOperation = name;
 	}
 
-	public operation(name: string, x: number, y?: number): void {
-		console.log(name, x, y)
-		if (y !== undefined) {
-			// Operations that have two arguments (i.e. add)
-			let operation = this._diadicOperations[name];
-			console.log(operation);
-			this._total = operation(x, y);
-			console.log(this._total);
-
-		} else {
-			// Operations that have one argument
-			let operation = this._monadicOperations[name];
-			this._total = operation(x);
-		}
-
+	public operation(name: string, x: number, y: number): number {
+		const op = this._operations[name];
+		return op(x, y);
 	}
 
-	public clear(x: number): number {
-		return x * 0;
+	public performOperation(name: string, x: number): void {
+		this.total = this.operation(name, this.total, x);
+		this.currentOperation = 'none';
 	}
 
 	public add(x: number, y: number): number {
@@ -94,10 +71,6 @@ export default class Calculator {
 
 	public modulo(x: number, y: number): number {
 		return x % y;
-	}
-
-	public dojo(x: number, y: number): number {
-		return x;
 	}
 
 }
