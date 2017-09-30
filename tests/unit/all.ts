@@ -1,2 +1,2 @@
-import './widgets/all';
+// import './widgets/all';
 import './services/all';
