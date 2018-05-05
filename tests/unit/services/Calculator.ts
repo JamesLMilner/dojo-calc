@@ -43,6 +43,10 @@ registerSuite({
 		assert.equal(calc.root(27, 3), 3, 'the cube root of 27 should be 3');
 	},
 
+	'modulo' : () => {
+		assert.equal(calc.modulo(10, 5), 0, 'performing 10 modulo 5 should be 0');
+	},
+
 	'operation' : () => {
 		const opResult = calc.operation('add', 1, 2);
 		assert.equal(opResult, 3, 'performing 1 + 2 should make the total 3');

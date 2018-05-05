@@ -1,6 +1,6 @@
 interface Operation {
 	(x: number, y: number): number;
-};
+}
 
 interface Operations {
 	[key: string]: Operation;

@@ -1,8 +1,8 @@
 import { v } from '@dojo/widget-core/d';
 import { WidgetBase } from '@dojo/widget-core/WidgetBase';
 import Calculator from './../services/Calculator';
-import * as css from './Button.css';
-import { ThemeableMixin, theme } from '@dojo/widget-core/mixins/Themeable';
+import * as css from './Button.m.css';
+import { ThemedMixin, theme } from '@dojo/widget-core/mixins/Themed';
 
 export interface ButtonProperties {
 	calc: Calculator;
@@ -12,19 +12,18 @@ export interface ButtonProperties {
 	setInputVal: any;
 }
 
-export const ButtonBase = ThemeableMixin(WidgetBase);
+export const ButtonBase = ThemedMixin(WidgetBase);
 
 @theme(css)
 export default class Button extends ButtonBase<ButtonProperties> {
 
 	private handleClick(): void {
-
 		const op = this.properties.operation;
 		const calc = this.properties.calc;
 		const val = this.properties.inputVal;
 		const setInputVal = this.properties.setInputVal;
 
-		switch(op) {
+		switch (op) {
 			case 'none': {
 				break;
 			}
@@ -48,7 +47,6 @@ export default class Button extends ButtonBase<ButtonProperties> {
 				break;
 			}
 		}
-
 		this.invalidate();
 	}
 
@@ -57,9 +55,9 @@ export default class Button extends ButtonBase<ButtonProperties> {
 		let classes;
 
 		if (this.properties.calc.currentOperation === this.properties.operation) {
-			classes = this.classes(css.calcButton, css.calcButtonSelected);
+			classes = this.theme([css.calcButton, css.calcButtonSelected]);
 		} else {
-			classes = this.classes(css.calcButton);
+			classes = this.theme(css.calcButton);
 		}
 
 		return v('button', {

@@ -2,10 +2,10 @@ import { v, w } from '@dojo/widget-core/d';
 import { WidgetBase } from '@dojo/widget-core/WidgetBase';
 import Button from './Button';
 import Calculator from '../services/Calculator';
-import { ThemeableMixin, theme } from '@dojo/widget-core/mixins/Themeable';
-import * as css from './Calc.css';
+import { ThemedMixin, theme } from '@dojo/widget-core/mixins/Themed';
+import * as css from './Calc.m.css';
 
-export const CalcBase = ThemeableMixin(WidgetBase);
+export const CalcBase = ThemedMixin(WidgetBase);
 
 @theme(css)
 export default class Calc extends CalcBase {
@@ -25,6 +25,7 @@ export default class Calc extends CalcBase {
 
 	private setInputVal(val: number) {
 		this.inputVal = val;
+		this.invalidate();
 	}
 
 	private updateTotal(newTotal: any) {
@@ -32,7 +33,6 @@ export default class Calc extends CalcBase {
 			this.inputVal = parseFloat(newTotal);
 		}
 		this.invalidate();
-
 	}
 
 	private createButton(operation: string, icon: string) {
@@ -76,32 +76,35 @@ export default class Calc extends CalcBase {
 
 		const buttons = this.createButtons();
 		const title = 'Dojo Calculator';
-		const bottomText = "Made with ☕️ by James Milner";
-
+		const bottomText = 'Made with ☕️ by James Milner';
 
 		return [
 			v('div', {
-				classes: this.classes(css.calcContainer)
-			},[
+				classes: this.theme(css.calcContainer)
+			}, [
 				v('h1', {
-					classes: this.classes(css.calcTitle)
+					id: 'calculatorTitle',
+					classes: this.theme(css.calcTitle)
 				}, [title]),
 				v('div', {
-					classes: this.classes(css.calc)
-				},[
+					id: 'calculator',
+					classes: this.theme(css.calc)
+				}, [
 					v('input', {
+						id: 'calculatorInput',
 						autofocus: true,
-						classes: this.classes(css.calcInput),
+						classes: this.theme(css.calcInput),
 						onkeyup: this.handleChange,
 						value : '' + this.inputVal
 					}),
 					v('div', buttons)
 				]),
 				v('span', {
-					classes: this.classes(css.calcBottomText)
+					id: 'calculatorBottomText',
+					classes: this.theme(css.calcBottomText)
 				}, [bottomText])
 			])
-		]
+		];
 	}
 
 }
