@@ -4,6 +4,8 @@ A small demo application using [Dojo 2](https://www.dojo.io). The application is
 
 ## Demo
 
+A demo of the application can be seen on the [GitHub pages site for this repository](https://JamesMilnerUK.github.io/dojo-calc).
+
 ## Development
 
 * `npm run build` - Will build the source files (src) and place the built files in output/dist
