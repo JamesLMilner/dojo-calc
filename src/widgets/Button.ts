@@ -61,6 +61,7 @@ export default class Button extends ButtonBase<ButtonProperties> {
 		}
 
 		return v('button', {
+			title: this.properties.operation,
 			classes: classes,
 			onclick: this.handleClick
 		}, [this.properties.icon]);
